@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RegisterViewController.swift
 //  MarvelApp
 //
 //  Created by Guilherme Takakuwa on 15/08/20.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ListCharactersTableViewController: UIViewController {
+class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        
-//        var chaveCriptografada = "";
-//        MD5(string: )
-//        print(<#T##items: Any...##Any#>)
+        
+        
+        
+        
     }
 
 
