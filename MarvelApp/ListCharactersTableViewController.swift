@@ -40,6 +40,10 @@ class ListCharactersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterInformationCell", for: indexPath)
+//        hero = characterArray index:indexPath
+        if let nomeLabel = self.view.viewWithTag(100) as? UILabel {
+//            nomeLabel.text = hero.name
+        }
         return cell
     }
     
@@ -62,7 +66,8 @@ class ListCharactersTableViewController: UITableViewController {
         
         AF.request(BASE_URL+charactersEndpoint+ts+publicKey+hash+limit+offset).response { response in
             self.offsetNumber = self.offsetNumber + self.limitNumber
-            debugPrint(response)
+            debugPrint(response.data)
+//            let responseDictionary:Dictionary   = response
         }
     }
 }
