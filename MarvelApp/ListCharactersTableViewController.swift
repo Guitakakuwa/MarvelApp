@@ -16,10 +16,15 @@ class ListCharactersTableViewController: UITableViewController {
     let BASE_URL: String = "http://gateway.marvel.com/v1/public/"
     var offsetNumber = 0
     var limitNumber = 20
+    var heroArray:[Hero] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getCharacter()
         
+        self.getCharacter { (info) in
+            self.heroArray = info?.data.results as! [Hero]
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Table view data source
@@ -40,36 +45,77 @@ class ListCharactersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterInformationCell", for: indexPath)
-//        hero = characterArray index:indexPath
-        if let nomeLabel = self.view.viewWithTag(100) as? UILabel {
-//            nomeLabel.text = hero.name
+        if(heroArray.count != 0){
+            if let nameLabel = self.view.viewWithTag(100) as? UILabel {
+                nameLabel.text = self.heroArray[indexPath.item].name
+            }
+            if let lastModifiedLabel = self.view.viewWithTag(101) as? UILabel {
+                let lastModified = self.heroArray[indexPath.item].modified
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                let date = dateFormatter.date(from:lastModified)!
+                dateFormatter.dateFormat = "MMM dd,yyyy"
+                
+                lastModifiedLabel.text = dateFormatter.string(from: date)
+                print(date)
+            }
+            if let descriptionLabel = self.view.viewWithTag(102) as? UILabel {
+                let description = self.heroArray[indexPath.item].description
+                
+                if( description != ""){
+                descriptionLabel.text = description
+                }else{
+                    descriptionLabel.text = "Sem descrição"
+                }
+            }
         }
         return cell
     }
     
+    func convertStringToDictionary(text: String) -> [String:AnyObject]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
+                return json
+            } catch {
+                print("Something went wrong")
+            }
+        }
+        return nil
+    }
     
-    func createAPIKey(timestamp timestamp:String ,privateKey privateKey:String,publicKey publicKey:String) -> (String){
+    func createAPIKey(timestamp:String ,privateKey:String,publicKey:String) -> (String){
         let initialStringHash = timestamp + privateKey + publicKey
         let finalHash =  initialStringHash.md5
         print(finalHash)
         return finalHash
     }
     
-    func getCharacter(){
-        let APIhash = self.createAPIKey(timestamp:"1",privateKey:MARVEL_PRIVATE_KEY,publicKey:MARVEL_PUBLIC_KEY)
+    func getCharacter(onComplete: @escaping (MarvelInfo?) -> Void) {
+        let APIhash = self.createAPIKey(timestamp: "1",privateKey: MARVEL_PRIVATE_KEY,publicKey: MARVEL_PUBLIC_KEY)
         let charactersEndpoint = "characters?"
         let ts = "ts=1"
         let publicKey = "&apikey="+MARVEL_PUBLIC_KEY
         let hash = "&hash="+APIhash
         let limit = "&limit="+String(limitNumber)
         let offset = "&offset="+String(offsetNumber)
+        let marvelAPI = BASE_URL+charactersEndpoint+ts+publicKey+hash+limit+offset
         
-        AF.request(BASE_URL+charactersEndpoint+ts+publicKey+hash+limit+offset).response { response in
-            self.offsetNumber = self.offsetNumber + self.limitNumber
-            debugPrint(response.data)
-//            let responseDictionary:Dictionary   = response
+        AF.request(marvelAPI).responseJSON { (response) in
+            guard let data = response.data,
+                let marvelInfo = try? JSONDecoder().decode(MarvelInfo.self, from: data),
+                marvelInfo.code == 200 else {
+                    onComplete(nil)
+                    return
+            }
+            onComplete(marvelInfo)
+            
         }
     }
+    
+    
 }
 
 extension String {
