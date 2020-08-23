@@ -10,6 +10,7 @@
 		053203DD684165CD4C1955D6 /* Pods_MarvelApp_MarvelAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FFD30AD2485C24AE180F99 /* Pods_MarvelApp_MarvelAppUITests.framework */; };
 		A8ED44F568F9BDDA2CC544B3 /* Pods_MarvelAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7452738A8C3AC7C844DDB7E /* Pods_MarvelAppTests.framework */; };
 		BF6AAD6F24F1C9DA0000676E /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6AAD6E24F1C9DA0000676E /* Structs.swift */; };
+		BF8875F324F30B1F00E7FE15 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8875F224F30B1F00E7FE15 /* LoginViewController.swift */; };
 		BFB06DE424E8580F00EC28F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB06DE324E8580F00EC28F1 /* AppDelegate.swift */; };
 		BFB06DE624E8580F00EC28F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB06DE524E8580F00EC28F1 /* SceneDelegate.swift */; };
 		BFB06DE824E8580F00EC28F1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB06DE724E8580F00EC28F1 /* RegisterViewController.swift */; };
@@ -47,6 +48,7 @@
 		653FE7D9557D1A2E6BF602F7 /* Pods-MarvelAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelAppTests.release.xcconfig"; path = "Target Support Files/Pods-MarvelAppTests/Pods-MarvelAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A6472D5AC543F9C20757E69 /* Pods-MarvelApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelApp.debug.xcconfig"; path = "Target Support Files/Pods-MarvelApp/Pods-MarvelApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BF6AAD6E24F1C9DA0000676E /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		BF8875F224F30B1F00E7FE15 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BFB06DE024E8580F00EC28F1 /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB06DE324E8580F00EC28F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFB06DE524E8580F00EC28F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				BFB06DE524E8580F00EC28F1 /* SceneDelegate.swift */,
 				BFB06E1524E8699200EC28F1 /* ListCharactersTableViewController.swift */,
 				BFB06DE724E8580F00EC28F1 /* RegisterViewController.swift */,
+				BF8875F224F30B1F00E7FE15 /* LoginViewController.swift */,
 				BFB06DE924E8580F00EC28F1 /* Main.storyboard */,
 				BF6AAD6E24F1C9DA0000676E /* Structs.swift */,
 				BFB06DEC24E8581200EC28F1 /* Assets.xcassets */,
@@ -416,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF8875F324F30B1F00E7FE15 /* LoginViewController.swift in Sources */,
 				BF6AAD6F24F1C9DA0000676E /* Structs.swift in Sources */,
 				BFB06DE824E8580F00EC28F1 /* RegisterViewController.swift in Sources */,
 				BFB06DE424E8580F00EC28F1 /* AppDelegate.swift in Sources */,
